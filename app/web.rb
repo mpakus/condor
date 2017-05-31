@@ -3,7 +3,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/json'
-require 'sass'
 require 'slim'
 
 # Web Backend

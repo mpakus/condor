@@ -1,3 +1,21 @@
-form
-  input type="text"
-  button Search
+.container-fluid
+  .search
+    .row
+      .col-md-10.col-md-offset-1
+        .form-section
+          .row
+            form#search_form
+              .col-md-4
+                .form-group
+                  input#departure.form-control placeholder="Departure city" type="text"
+              .col-md-4
+                .form-group
+                  input#destination.form-control placeholder="Destination city" type="text"
+              .col-md-3
+                .form-group
+                  .input-group.date
+                    input#date.form-control placeholder="Travel date" type="text"
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-calendar
+              .col-md-1
+                button.btn.btn-default.btn-warning type="submit" Search
