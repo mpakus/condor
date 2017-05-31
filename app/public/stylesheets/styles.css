@@ -3,6 +3,14 @@ body{
     color: #FFF;
 }
 
+.title{
+    font-size: 42px !important;
+    font-weight: bold;
+    background: -webkit-linear-gradient(#2cb5e8, #1fc8db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .search{
     border-radius: 5px;
     height: auto;
