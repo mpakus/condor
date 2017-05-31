@@ -1,13 +1,21 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/json'
+require 'sass'
 
 class Web < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
 
+  configure do
+    set :public_folder, Proc.new { File.join(root, 'public') }
+    set :views, Proc.new { File.join(root, 'views') }
+    Slim::Engine.set_options pretty: true
+  end
+
   get '/' do
+    slim :index
   end
 
   get '/airlines' do
