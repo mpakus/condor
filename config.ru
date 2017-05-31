@@ -5,7 +5,7 @@ require_relative 'app/web'
 Bundler.require(:default)
 Sass::Plugin.options[:style] = :compressed
 use Sass::Plugin::Rack
-use Rack::Coffee, root: 'public', urls: '/javascripts'
+use Rack::Coffee, root: 'app/public', urls: '/javascripts'
 
 run Web
 
