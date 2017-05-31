@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/json'
 require 'sass'
+require 'slim'
 
 class Web < Sinatra::Base
   configure :development do
