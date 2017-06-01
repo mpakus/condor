@@ -11,17 +11,18 @@
               .col-md-4
                 .form-group
                   label Departure
-                  input#departure.form-control placeholder="eg: Sydney" type="text"
+                  input#departure.form-control placeholder="eg: Sydney" type="text" required="required" value="Sydney"
               .col-md-4
                 .form-group
                   label Destination
-                  input#destination.form-control placeholder="eg: Heathrow" type="text"
+                  input#destination.form-control placeholder="eg: Heathrow" type="text" required="required" value="Heathrow"
               .col-md-3
                 .form-group
                   label Travel date
                   .input-group.date
-                    input#date.form-control placeholder="MM/DD/YYYY" type="text"
+                    input#date.form-control placeholder="YYYY-MM-DD" type="text" required="required" value="#{Date.today.strftime('%Y-%m-%d')}"
                     span.input-group-addon
                       i.glyphicon.glyphicon-calendar
               .col-md-1.col-btn-search
                 button.btn.btn-default.btn-warning type="submit" Search
+  #message

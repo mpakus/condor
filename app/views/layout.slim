@@ -11,4 +11,4 @@ html
     script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC3/js/bootstrap-datepicker.js"
   body
     == yield
-    script src='/javascripts/application.js'
+    script src='/javascripts/application.js?t=#{Time.now}'
