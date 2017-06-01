@@ -9,10 +9,15 @@ RSpec.describe Flight::Airports, :vcr do
   end
 
   it 'and list has correct structure with code and name fields' do
-    %w[
+    fields = %w[
       airportCode airportName cityCode cityName countryCode countryName latitude longitude stateCode timeZone
-    ].each do |port|
+    ]
+    airports.each do |port|
       fields.each { |f| expect(port[f]).not_to be_nil }
     end
+  end
+
+  it 'gets empty list of airports for wrong city' do
+    expect(wrong_airports).to be_empty
   end
 end
