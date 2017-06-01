@@ -1,28 +1,21 @@
 class App
+  # App must be Singleton
   @instance = null
-  # App is Singleton
   @run: -> @instance || @instance = new App
 
   settings:
-    airlines_path: -> '/airlines'
-    airports_path: -> '/airports'
     search_path: -> '/search'
-    flight_search_path: (code) -> "/search/#{code}"
 
+  # initialization
   constructor: ->
-    @init_datepicker()
-    @init_form()
-
-  init_form: ->
     $('#search_form').submit @on_submit_form.bind(@)
-
-  init_datepicker: ->
     $('.date').datepicker
       format: 'yyyy-mm-dd'
       autoclose: true,
       toggleActive: true
       orientation: 'auto left'
 
+  # search form logic
   on_submit_form: ->
     departure = $('#departure').val()
     destination = $('#destination').val()
@@ -40,6 +33,7 @@ class App
         that.message(response.responseJSON.message, 'alert')
     false
 
+  # display UI messages (errors etc)
   message: (msg, type = '')->
     @message_container ||= $('#message')
     return @message_container.html(msg) if type is ''
