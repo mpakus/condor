@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://node.locomote.com/code-task/airports?q=Melbourne
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/58.0.3029.110 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.10.2
+      Date:
+      - Thu, 01 Jun 2017 13:13:13 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '613'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        [
+          {
+            "airportCode": "MLB",
+            "airportName": "Melbourne International Arpt",
+            "cityCode": "MLB",
+            "cityName": "Melbourne",
+            "countryCode": "US",
+            "countryName": "United States",
+            "latitude": 28.102753,
+            "longitude": -80.645258,
+            "stateCode": "FL",
+            "timeZone": "America/New_York"
+          },
+          {
+            "airportCode": "MEL",
+            "airportName": "Tullamarine Arpt",
+            "cityCode": "MEL",
+            "cityName": "Melbourne",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "latitude": -37.673333,
+            "longitude": 144.843333,
+            "stateCode": "VI",
+            "timeZone": "Australia/Hobart"
+          }
+        ]
+    http_version: 
+  recorded_at: Thu, 01 Jun 2017 13:13:15 GMT
+recorded_with: VCR 3.0.3
