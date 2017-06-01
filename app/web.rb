@@ -17,7 +17,7 @@ class Web < Sinatra::Base
   configure do
     set(:public_folder, proc { File.join(root, 'public') })
     set(:views, proc { File.join(root, 'views') })
-    set(:dump_errors, false)
+    set(:dump_errors, true)
     set(:raise_errors, true)
     set(:show_exceptions, :after_handler)
     Slim::Engine.set_options pretty: true

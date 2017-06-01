@@ -28,7 +28,7 @@ class App
         url: @settings.search_path()
         data: { departure: departure, destination: destination, date: date }
       .done (response)->
-        console.log response
+        console.log response.responseJSON
       .fail (response)->
         that.message(response.responseJSON.message, 'alert')
     false
