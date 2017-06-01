@@ -7,18 +7,21 @@
       .col-md-10.col-md-offset-1
         .form-section
           .row
-            form#search_form
+            form#search_form.form-horizontal
               .col-md-4
                 .form-group
-                  input#departure.form-control placeholder="Departure city" type="text"
+                  label Departure
+                  input#departure.form-control placeholder="Sydney" type="text"
               .col-md-4
                 .form-group
-                  input#destination.form-control placeholder="Destination city" type="text"
+                  label Destination
+                  input#destination.form-control placeholder="Heathrow" type="text"
               .col-md-3
                 .form-group
+                  label Travel date
                   .input-group.date
-                    input#date.form-control placeholder="Travel date" type="text"
+                    input#date.form-control placeholder="MM/DD/YYYY" type="text"
                     span.input-group-addon
                       i.glyphicon.glyphicon-calendar
-              .col-md-1
+              .col-md-1.col-btn-search
                 button.btn.btn-default.btn-warning type="submit" Search
