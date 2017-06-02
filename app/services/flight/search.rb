@@ -57,7 +57,7 @@ module Flight
             end
           end
         end
-        results.map(&:value)
+        results.map(&:value).flatten.sort_by{ |k| k['start']['dateTime'] }
       end
     end
 
