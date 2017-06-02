@@ -11,4 +11,19 @@ RSpec.describe Web do
     get '/'
     expect(last_response).to be_ok
   end
+
+  it 'should allow accessing the /airlines page' do
+    get '/'
+    expect(last_response).to be_ok
+  end
+
+  it 'should allow accessing the /airports?q=SYD page' do
+    get '/'
+    expect(last_response).to be_ok
+  end
+
+  it 'should allow accessing the /search?date=2017-12-05&from=SYD&to=JFK' do
+    get '/'
+    expect(last_response).to be_ok
+  end
 end

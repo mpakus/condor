@@ -22,7 +22,7 @@ module Flight
         date = date.strftime('%Y-%m-%d')
         results[date] = cross_flights_on_date(date, airports_from, airports_to)
       end
-      results.each{|k,v| results[k] = v.value}
+      results.each { |k, v| results[k] = v.value }
     end
 
     private
@@ -32,15 +32,15 @@ module Flight
     def find_airports(from, to)
       airports_from = Flight::Airports.new(from).perform
       airports_to = Flight::Airports.new(to).perform
-      raise ErrorAirport.new("Can't find the departure airport") unless airports_from.any?
-      raise ErrorAirport.new("Can't find the departure airport") unless airports_to.any?
-      [airports_from.map{|a| a['airportCode']}, airports_to.map{|a| a['airportCode']}]
+      raise ErrorAirport, "Can't find the departure airport" unless airports_from.any?
+      raise ErrorAirport, "Can't find the departure airport" unless airports_to.any?
+      [airports_from.map { |a| a['airportCode'] }, airports_to.map { |a| a['airportCode'] }]
     end
 
     # Creates interval of dates (date - 2, date - 1, date, date + 1, date + 5)
     # @return [Range]
     def dates_interval
-      (Date.parse(@date) - 2...Date.parse(@date) + 2)
+      (Date.parse(@date) - 2..Date.parse(@date) + 2)
     end
 
     # Search all flights on that date
@@ -52,12 +52,10 @@ module Flight
         # Airlines * Departure Airports * Destination Airports
         airlines.each do |airline|
           airports_from.each do |from|
-            airports_to.each do |to|
-              results << flight_search(airline['code'], date, from, to)
-            end
+            airports_to.each { |to| results << flight_search(airline['code'], date, from, to) }
           end
         end
-        results.map(&:value).flatten.sort_by{ |k| k['start']['dateTime'] }
+        results.map(&:value).flatten.sort_by { |k| k['start']['dateTime'] }
       end
     end
 
@@ -72,7 +70,6 @@ module Flight
     def flight_search(airline_code, date, from, to)
       Thread.new do
         url = "http://node.locomote.com/code-task/flight_search/#{airline_code}?date=#{date}&from=#{from}&to=#{to}"
-        puts url
         JSON.parse(Request.fetch(url))
       end
     end
