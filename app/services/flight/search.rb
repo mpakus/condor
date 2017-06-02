@@ -24,7 +24,7 @@ module Flight
           end
         end
       end
-      results
+      results.map(&:value)
     end
 
     private
@@ -34,9 +34,11 @@ module Flight
     end
 
     def flight_search(airline_code, date, from, to)
-      url = "http://node.locomote.com/code-task/flight_search/#{airline_code}?date=#{date}&from=#{from}&to=#{to}"
-      puts url
-      JSON.parse(Request.fetch(url))
+      Thread.new do
+        url = "http://node.locomote.com/code-task/flight_search/#{airline_code}?date=#{date}&from=#{from}&to=#{to}"
+        puts url
+        JSON.parse(Request.fetch(url))
+      end
     end
 
     def find_airports
