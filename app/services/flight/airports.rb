@@ -9,6 +9,7 @@ module Flight
       @q = q
     end
 
+    # @return [Array]
     def perform
       JSON.parse(Request.fetch("http://node.locomote.com/code-task/airports?q=#{@q}"))
     end

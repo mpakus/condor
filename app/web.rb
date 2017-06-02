@@ -40,7 +40,6 @@ class Web < Sinatra::Base
   end
 
   get '/search' do
-    results = Flight::Search.new(params[:departure], params[:destination], params[:date]).perform!
-    json status: :ok, data: results
+    json status: :ok, data: Flight::Search.new(params[:departure], params[:destination], params[:date]).perform!
   end
 end

@@ -37,10 +37,38 @@ class App
         url: @settings.search_path()
         data: { departure: departure, destination: destination, date: date }
       .done (response)->
-        console.log response.responseJSON
+        that.draw_tables(response.data, '#content')
       .fail (response)->
         that.message(response.responseJSON.message, 'alert')
     false
+
+  draw_tables: (data, container)->
+    tab = content = []
+    for date, results in data
+      [tab_tpl, content_tpl] = @draw_tab(date, results)
+      tab += tab_tpl
+      content += content_tpl
+
+    tpl = """
+      <ul class="nav nav-tabs" role="tablist">
+        #{tab.join()}
+      </ul>
+
+      <div class="tab-content">
+        #{content.join()}
+      </div>
+    """
+    $(container).html(tpl)
+
+  draw_tab: (date, results)->
+    tab_tpl = """
+      <li role="presentation"><a href="##{date}" data-toggle="tab">#{date}</a></li>
+    """
+    content_tpl = """
+      <div class="tab-pane" id="#{date}">...</div>
+    """
+    [tab_tpl, content_tpl]
+
 
   # display UI messages (errors etc)
   message: (msg, type = '')->
