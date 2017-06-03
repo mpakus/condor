@@ -19,3 +19,7 @@ and visit http://localhost:3000
 ## Tests
 
 > bundle exec rspec
+
+## Example
+
+http://condor-flights.herokuapp.com/
