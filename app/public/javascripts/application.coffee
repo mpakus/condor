@@ -17,6 +17,7 @@ class App
     $document = $(document)
     $search_btn = $('#search_btn')
     $progressbar = $('#progressbar')
+    # set global AJAX Observers
     $document.ajaxStart ->
       $search_btn.attr("disabled", true)
       $progressbar.removeClass('hidden')
@@ -48,7 +49,6 @@ class App
     content = []
     first = true
     for date, results of data
-      console.log 'results', results
       [tab_tpl, content_tpl] = @draw_tab(date, results, first)
       tab.push(tab_tpl)
       content.push(content_tpl)
@@ -68,7 +68,6 @@ class App
   draw_tab: (date, results, active)->
     flights = []
     for flight in results
-      console.log flight
       flights.push("""
         <tr>
           <td>
@@ -77,16 +76,18 @@ class App
             <p>Flight number: #{flight.flightNum}</p>
           </td>
           <td>
-            <p>Departure: #{flight.start.airportName} (#{flight.start.airportCode})</p>
-            <p>Departure time: <strong>#{moment(flight.start.dateTime).format('YYYY-MM-DD, h:mm A')}</strong></p>
+            <p><strong>Departure</strong></p>
+            <p>#{flight.start.airportName} (#{flight.start.airportCode})</p>
+            <p>#{moment(flight.start.dateTime).format('YYYY-MM-DD, h:mm A')}</p>
           </td>
           <td>
             <p>Distance: #{flight.distance} km.</p>
             <p>Duration: #{moment.duration(flight.durationMin, 'minutes').humanize()}</p>
           </td>
           <td>
-            <p>Arrival: #{flight.finish.airportName} (#{flight.finish.airportCode})</p>
-            <p>Arrival time: <strong>#{moment(flight.finish.dateTime).format('YYYY-MM-DD, h:mm A')}</strong></p>
+            <p><strong>Arrival</strong></p>
+            <p>#{flight.finish.airportName} (#{flight.finish.airportCode})</p>
+            <p>#{moment(flight.finish.dateTime).format('YYYY-MM-DD, h:mm A')}</p>
           </td>
           <td>
             <button class="btn btn-info">$#{flight.price} AUD</button>

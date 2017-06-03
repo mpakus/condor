@@ -3,9 +3,10 @@
 require_relative('../request')
 
 module Flight
+  # Airports not found
   class ErrorAirport < StandardError; end
 
-  # Search flights from - to on 5 dates interval
+  # Search flights from - to in 5 dates interval
   class Search
     def initialize(from, to, date)
       @from = from
@@ -18,7 +19,7 @@ module Flight
       results = {}
       airports_from, airports_to = find_airports(@from, @to)
       dates_interval.each do |date|
-        next if date <= Date.today # skip passed days
+        next if date <= Date.today # skip days in the past
         date = date.strftime('%Y-%m-%d')
         results[date] = cross_flights_on_date(date, airports_from, airports_to)
       end
@@ -31,9 +32,11 @@ module Flight
     # @return [Array]
     def find_airports(from, to)
       airports_from = Flight::Airports.new(from).perform
-      airports_to = Flight::Airports.new(to).perform
       raise ErrorAirport, "Can't find the departure airport" unless airports_from.any?
+
+      airports_to = Flight::Airports.new(to).perform
       raise ErrorAirport, "Can't find the departure airport" unless airports_to.any?
+
       [airports_from.map { |a| a['airportCode'] }, airports_to.map { |a| a['airportCode'] }]
     end
 
@@ -55,7 +58,8 @@ module Flight
             airports_to.each { |to| results << flight_search(airline['code'], date, from, to) }
           end
         end
-        results.map(&:value).flatten.sort_by { |k| k['start']['dateTime'] }
+        # Thread.new.value then Up array 1 lvl and sort by price (cheapest on top)
+        results.map(&:value).flatten.sort_by { |k| k['price'] }
       end
     end
 
@@ -65,7 +69,7 @@ module Flight
       Flight::Airlines.new.perform
     end
 
-    # Create Thread for search one flight on date from and to
+    # Create Thread for search one flight from and to on date
     # @return [Thread]
     def flight_search(airline_code, date, from, to)
       Thread.new do
